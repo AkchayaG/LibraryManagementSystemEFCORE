@@ -1,6 +1,7 @@
-﻿using LibraryManagementSystemEFCORE.Data;
+﻿using LibraryManagementSystemEFCORE.Services;
 
-using var context = new LibraryContext();
-context.Database.EnsureCreated();
+var service = new LibraryService();
 
-Console.WriteLine("Database created and connected successfully!");
+// Testing AddBook method
+service.AddBook("Clean Code", "Robert C. Martin");
+service.AddBook("The Pragmatic Programmer", "Andrew Hunt");
