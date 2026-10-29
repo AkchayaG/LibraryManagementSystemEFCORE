@@ -25,6 +25,7 @@ namespace LibraryManagementSystemEFCORE.Services
             _context.SaveChanges();
             Console.WriteLine($"Book '{title}' added successfully!");
         }
+
         public void GetAllBooks()
         {
             var books = _context.Books.ToList();
@@ -40,8 +41,8 @@ namespace LibraryManagementSystemEFCORE.Services
             {
                 Console.WriteLine($"ID: {book.Id} | Title: {book.Title} | Author: {book.Author} | Available: {book.IsAvailable}");
             }
-
         }
+
         public void GetBookById(int id)
         {
             var book = _context.Books.Find(id);
@@ -54,6 +55,47 @@ namespace LibraryManagementSystemEFCORE.Services
             }
 
             Console.WriteLine($"ID: {book.Id} | Title: {book.Title} | Author: {book.Author} | Available: {book.IsAvailable}");
+        }
+
+        public void BorrowBook(int id)
+        {
+            var book = _context.Books.Find(id);
+
+            if (book == null)
+            {
+                Console.WriteLine($"Book with ID {id} not found.");
+                return;
+            }
+
+            if (!book.IsAvailable)
+            {
+                Console.WriteLine($"Book '{book.Title}' is already borrowed.");
+                return;
+            }
+
+            book.IsAvailable = false;
+            _context.SaveChanges();
+            Console.WriteLine($"You have successfully borrowed '{book.Title}'.");
+        }
+        public void ReturnBook(int id)
+        {
+            var book = _context.Books.Find(id);
+
+            if (book == null)
+            {
+                Console.WriteLine($"Book with ID {id} not found.");
+                return;
+            }
+
+            if (book.IsAvailable)
+            {
+                Console.WriteLine($"Book '{book.Title}' is not borrowed.");
+                return;
+            }
+
+            book.IsAvailable = true;
+            _context.SaveChanges();
+            Console.WriteLine($"You have successfully returned '{book.Title}'.");
         }
     }
 }

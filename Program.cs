@@ -2,5 +2,8 @@
 
 var service = new LibraryService();
 
-// Testing GetBookById
+// Testing ReturnBook
+service.ReturnBook(1);
+
+// Verify status change back to True
 service.GetBookById(1);
