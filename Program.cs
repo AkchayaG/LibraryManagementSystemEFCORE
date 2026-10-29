@@ -2,5 +2,5 @@
 
 var service = new LibraryService();
 
-// Testing GetAllBooks method
-service.GetAllBooks();
+// Testing GetBookById
+service.GetBookById(1);

@@ -42,5 +42,18 @@ namespace LibraryManagementSystemEFCORE.Services
             }
 
         }
+        public void GetBookById(int id)
+        {
+            var book = _context.Books.Find(id);
+
+            Console.WriteLine($"\n--- Search Result for Book ID: {id} ---");
+            if (book == null)
+            {
+                Console.WriteLine($"Book with ID {id} not found.");
+                return;
+            }
+
+            Console.WriteLine($"ID: {book.Id} | Title: {book.Title} | Author: {book.Author} | Available: {book.IsAvailable}");
+        }
     }
 }
